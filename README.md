@@ -27,7 +27,3 @@ Quinn, a character in the "Endless Summer" series, is one of the college student
 *Did You Know?* ~~She is skilled at figure skating, but it's only a hobby for her.~~
 
 Links: [Wikia](http://choices-stories-you-play.wikia.com/wiki/Quinn_Kelly) | [Tumblr](https://www.tumblr.com/search/quinn%20%23playchoices) | [Twitter](https://twitter.com/search?f=tweets&q=%40playchoices%20quinn)
-
-
----
-^Iris: ^a ^reference ^bot ^for ^r/Choices ^| [^Bot ^Info/Support](https://www.reddit.com/message/compose/?to=kungming2&subject=About+Iris)
