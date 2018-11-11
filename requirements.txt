@@ -1,0 +1,5 @@
+google
+praw
+prawcore
+requests
+wikia
