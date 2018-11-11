@@ -33,7 +33,7 @@ import traceback
 
 """INTIALIZATION"""
 
-VERSION_NUMBER = "0.6.8 Beta"
+VERSION_NUMBER = "0.7.0 Beta"
 SUBREDDIT = 'Choices+testingground4bots'
 WAIT = 15  # Number of seconds to pause before restarting. Iris runs continuously and not on a loop.
 SOURCE_FOLDER = os.path.dirname(os.path.realpath(__file__))  # Fetch the absolute directory the script is in.
@@ -191,22 +191,24 @@ def form_character_comment(character_name):  # Make a nice Markdown comment from
         if keyword in name:  # This matches.
             return None  # Exit.
     
-    # Get trivia.
+    # Get trivia tidbits if we can and wrap them in spoiler code.
     trivia = get_random_character_trivia(page_id)
     if trivia is not None:
         trivia = '*Did You Know?* >!{}!<'.format(trivia)
     else: 
         trivia = ''
-    
+
+    # Get the short name for use in the Tumblr/Twitter links. This allows us to get
+    if " " in name:
+        short_name = name.split(' ', 1)[0].lower()
+    else:
+        short_name = str(name).lower()
+
     # Form the Tumblr link.
-    tumblr_url = "https://www.tumblr.com/tagged/{}+%23playchoices".format(name.lower().replace(" ", "-"))
+    tumblr_url = "https://www.tumblr.com/search/{}%20%23playchoices".format(short_name)
 
     # Form the Twitter link.
-    twitter_url = "https://twitter.com/search?f=tweets&q=%40playchoices%20{}"
-    if " " in name:
-        twitter_url = twitter_url.format(name.split(' ', 1)[0])  # Twitter search for just the first name.
-    else:
-        twitter_url = twitter_url.format(name)
+    twitter_url = "https://twitter.com/search?f=tweets&q=%40playchoices%20{}".format(short_name)
 
     new_comment = ENTRY_TEMPLATE.format(character_name=name, character_image=headshot, character_summary=summary,
                                         trivia_bit=trivia, wikia_link=wikia_url, tumblr_link=tumblr_url,
@@ -333,10 +335,9 @@ while True:
     word = input("Enter the input text: ")
     if word == 'x':
         break
-    returned_info = parse_comment_search_terms(word)
+    returned_info = form_character_comment(word)
     print(returned_info)
 '''
-
 
 while True:
     # noinspection PyBroadException
